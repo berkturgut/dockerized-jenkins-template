@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-server
+    ports:
+      - "8080:8080"  # Jenkins web arayüzü
+      - "50000:50000" # Jenkins agent portu
+    volumes:
+      - ./jenkins_volume:/var/jenkins_home  # Kalıcı veriler için volume
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:
+    driver: local  # Kalıcı saklama alanı için local driver kullanıyoruz
